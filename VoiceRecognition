@@ -1,0 +1,43 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Windows.Speech;
+using System;
+using UnityEngine.UI;
+using System.Linq;
+
+public class VoiceRecognition : MonoBehaviour
+{
+    KeywordRecognizer keywordRecognizer;
+    Dictionary<string, Action> wordToAction; 
+    public Text Palabra; 
+
+    private void Start()
+    {
+        wordToAction = new Dictionary<string, Action>();
+        wordToAction.Add("Hola", Saludo);
+        wordToAction.Add("Adios", Despedir);
+
+        keywordRecognizer = new KeywordRecognizer(wordToAction.Keys.ToArray());
+        keywordRecognizer.OnPhraseRecognized += WordRecognized;
+        keywordRecognizer.Start(); 
+
+
+    }
+
+    private void WordRecognized(PhraseRecognizedEventArgs word)
+    {
+        wordToAction[word.text].Invoke(); 
+    }
+
+    private void Despedir()
+    {
+        Palabra.text = "Adiós";
+
+    }
+
+    private void Saludo()
+    {
+        Palabra.text = "Hola";
+    }
+}
