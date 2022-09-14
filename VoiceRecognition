@@ -10,7 +10,7 @@ public class VoiceRecognition : MonoBehaviour
 {
     KeywordRecognizer keywordRecognizer;
     Dictionary<string, Action> wordToAction; 
-    public Text Palabra; 
+    public Text palabra_txt; 
 
     private void Start()
     {
@@ -32,12 +32,12 @@ public class VoiceRecognition : MonoBehaviour
 
     private void Despedir()
     {
-        Palabra.text = "Adiós";
+        palabra_txt.text = "Adiós";
 
     }
 
     private void Saludo()
     {
-        Palabra.text = "Hola";
+        palabra_txt.text = "Hola";
     }
 }
