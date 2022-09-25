@@ -1,0 +1,47 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Networking;
+using System;
+public class WebRequest : MonoBehaviour
+{
+    public string url; // --> https://fedeperin-harry-potter-api.herokuapp.com/personajes/
+    public Personajes personaje;
+
+    void Start()
+    {
+        StartCoroutine(GetText());
+    }
+
+    public IEnumerator GetText()
+    {
+        int random = UnityEngine.Random.Range(0, 24);
+        // Obtiene un personaje aleatorio de la API.
+        UnityWebRequest request = UnityWebRequest.Get(url + random);
+        yield return request.SendWebRequest();
+
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log(request.error);
+        }
+        else
+        {
+            string json = request.downloadHandler.text;
+            Debug.Log(json);
+            personaje = JsonUtility.FromJson<Personajes>(json);
+        }
+    }
+}
+
+[Serializable]
+public class Personajes
+{
+    public int id;
+    public string personaje;
+    public string apodo;
+    public bool estudianteDeHogwarts;
+    public string casaDeHogwarts;
+    public string interpretado_por;
+    public List<string> hijos;
+    public string imagen;
+}
