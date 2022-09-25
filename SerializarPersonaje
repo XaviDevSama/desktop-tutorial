@@ -1,0 +1,40 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Networking;
+using System;
+
+public class SerializarMago : MonoBehaviour
+{
+    public string url;
+    public Personajes nuevopersonaje;
+
+    void Start()
+    {
+        SerializarPersonaje();
+    }
+
+    public void SerializarPersonaje()
+    {
+        string json = JsonUtility.ToJson(nuevopersonaje);
+        Debug.Log(json);
+    }
+
+
+}
+
+
+
+
+[Serializable]
+public class Personajes
+{
+    public int id;
+    public string personaje;
+    public string apodo;
+    public bool estudianteDeHogwarts;
+    public string casaDeHogwarts;
+    public string interpretado_por;
+    public List<string> hijos;
+    public string imagen;
+}
