@@ -1,0 +1,38 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Sprites;
+
+public class GetDistance : MonoBehaviour
+{
+    public GameObject homer, bart;
+    public float distance;
+
+    public float distAlertaAmarilla, distAlertaRoja;
+    private void Update()
+    {
+        distance = Vector2.Distance(homer.transform.position,
+            bart.transform.position);
+
+        Consecuencias();
+    }
+
+    public void Consecuencias()
+    {
+        if (distance < distAlertaRoja)
+        {
+            Debug.Log("Homer Atrapa a Bart");
+            bart.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+        else if (distance > distAlertaRoja && distance < distAlertaAmarilla)
+        {
+            Debug.Log("Bart esta a punto de ser atrapado");
+            bart.GetComponent<SpriteRenderer>().color = Color.yellow;
+        }
+        else
+        {
+            Debug.Log("Bart no esta al alcance");
+            bart.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+    }
+}
