@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+
+public class SiblingIndex : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+{
+    private RectTransform rect;
+    public int currentSiblingIndex;
+
+    private void Awake()
+    {
+        rect = gameObject.GetComponent<RectTransform>();
+        currentSiblingIndex = rect.transform.GetSiblingIndex();
+    }
+
+    public void OnPointerDown(PointerEventData data)
+    {
+        rect.transform.SetAsLastSibling();
+    }
+
+    public void OnPointerUp(PointerEventData data)
+    {
+        rect.SetSiblingIndex(currentSiblingIndex);
+    }
+
+
+
+}
