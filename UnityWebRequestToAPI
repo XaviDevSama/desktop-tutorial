@@ -27,21 +27,7 @@ public class WebRequest : MonoBehaviour
         else
         {
             string json = request.downloadHandler.text;
-            Debug.Log(json);
-            personaje = JsonUtility.FromJson<Personajes>(json);
         }
     }
 }
 
-[Serializable]
-public class Personajes
-{
-    public int id;
-    public string personaje;
-    public string apodo;
-    public bool estudianteDeHogwarts;
-    public string casaDeHogwarts;
-    public string interpretado_por;
-    public List<string> hijos;
-    public string imagen;
-}
